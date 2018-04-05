@@ -1,0 +1,13 @@
+A00			#INICIO
+A00	D300	#Lê um byte do txt
+A02	900C	#Armazena na memoria
+A04	8A03	#Carrega a posição de carga
+A06	4A17	#Soma 1 à posição de carga 
+A08	9A03	#Atualiza posição de carga 
+A0A 8A01	#Carrega o "skip"
+A0C 4A17	#Soma 1 ao skip (n° de bytes lidos)
+A0E 9A01	#Atualiza skip
+A10 5A16	#Subtrai tamanho
+A12 2A00	#if < 0 goTo INICIO
+A14 000C	#acabou leitura
+A16 2C01	#tamanho e UM

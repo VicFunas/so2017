@@ -1,0 +1,43 @@
+B00			#INICIO
+B00	D300	#Lê um byte do txt (D3skip)
+B02	9B23	#Armazena no TEMP
+B04 8B22	#Carrega o contador no acumulador
+B06 5B24	#COUNT -= 3
+B08 2B26	#JSR (caso esteja no "cabeçalho") 
+B0A 8B23	#Carrega o valor lido (INICIO do MPL)
+B0C	9000	#Armazena na memoria
+B0E	8B0D	#Carrega a posição de carga
+B10	4B21	#Soma 1 à posição de carga 
+B12	9B0D	#Atualiza posição de carga 
+B14 8B01	#Carrega o "skip"
+B16 4B21	#Soma 1 ao skip (n° de bytes lidos)
+B18 9B01	#Atualiza skip
+B1A 5B20	#Subtrai tamanho
+B1C 2B00	#if < 0 goTo INICIO 
+B1E 0000	#acabou leitura (0FIEND + SEND)
+B20 2C01	#tamanho e UM
+B22 0000	#COUNT e TEMP
+B24 0300	#TRES
+B26	4B21	#COUNT += 1 (SR)
+B28 1B40	#if COUNT == 2 goTo DD
+B2A	4B21	#COUNT += 1
+B2C	1B38	#if COUNT == 1 goTo PINK
+B2E 8B23	#Carrega o valor lido (ZERO DAWN)
+B30 9B1E 	#Armazena no primeiro fim
+B32 4B0C	#Lido += 9x
+B34 9B0C	#Pega byte mais significativo do endereço inicial de carga
+B36 0B46	#goTo FINALE p terminar a sub-rotina
+B38 8B23	#Carrega o valor lido (PINK)
+B3A 9B1F 	#Armazena no segundo fim
+B3C	9B0D	#Pega byte menos significativo do endereço inicial de carga
+B3E 0B46	#goTo FINALE p terminar a sub-rotina
+B40 8B23	#Carrega o valor lido (DD)
+B42 9B20	#Pega tamanho do programa
+B44 0B46	#goTo FINALE p terminar a sub-rotina
+B46 8B22	#Carrega o contador (FINALE)
+B48 4B21 	#COUNT += 1
+B4A 9B22	#Atualiza COUNT
+B4C 8B01	#Carrega o "skip"
+B4E 4B21	#Soma 1 ao skip (n° de bytes lidos)
+B50 9B01	#Atualiza skip
+B52 0B00	#RTS

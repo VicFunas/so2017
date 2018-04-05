@@ -1,0 +1,51 @@
+java.util.ArrayList<String> str = new java.util.ArrayList<String>();
+String b = "banana";
+str.add(b);
+System.out.println(str.get(0));
+b = "aura";
+System.out.println(str.get(0));
+String b = "rapapa";
+String a = b.substring(1);
+a = "r"+a;
+b+= "!";
+System.out.println(a);
+System.out.println(b);
+
+// hex to bin
+String hex = "F9A560B";
+int num = 0;
+String bin = "";
+for (int i = 0; i < hex.length(); i++) {
+	num = Integer.parseInt(hex.valueOf(hex.charAt(i)), 16);
+	String aria = Integer.toString(num, 2); 
+	bin += String.format("%4S", aria).replace(' ', '0');
+}
+System.out.println("binary = " + bin);
+
+java.util.ArrayList<int[][]> i = new java.util.ArrayList<int[][]>();
+int[][] j = new int[5][2];
+i.add(j);
+for (int m = 0; m < j.length; m++) {
+	for (int n = 0; n < j[m].length; n++) {
+		j[m][n] = 0;
+	}
+}
+j[0][0] = 53;
+System.out.println(i.get(0)[0][0]);
+System.out.println(i.get(0)[4][1]);
+
+// int to hex
+int t = 15;
+String a = Integer.toHexString(t).toUpperCase(); //Integer.toString(a, 16).toUpperCase()
+a = String.format("%2S", a).replace(' ', '0');
+System.out.println(a);
+
+
+java.util.ArrayList<java.util.ArrayList<String>> array = new java.util.ArrayList<java.util.ArrayList<String>>();
+String b = "banana";
+java.util.ArrayList<String> str = new java.util.ArrayList<String>();
+array.add(str);
+array.get(0).add(b);
+str.add("ice");
+
+System.out.println(array.get(0).get(1));

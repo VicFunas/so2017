@@ -1,0 +1,92 @@
+String [][] precure = new String [12][6];
+precure[0][0] = "black";
+precure[0][1] = "white";
+precure[0][2] = "luminous";
+precure[1][0] = "bloom";
+precure[1][1] = "egret";
+precure[2][0] = "dream";
+precure[2][1] = "rouge";
+precure[2][2] = "lemonade";
+precure[2][3] = "mint";
+precure[2][4] = "aqua";
+precure[2][5] = "rose";
+precure[3][0] = "peach";
+precure[3][1] = "berry";
+precure[3][2] = "pine";
+precure[3][3] = "passion";
+precure[4][0] = "blossom";
+precure[4][1] = "marine";
+precure[4][2] = "sunshine";
+precure[4][3] = "moonlight";
+precure[5][0] = "melody";
+precure[5][1] = "rhythm";
+precure[5][2] = "beat";
+precure[5][3] = "muse";
+precure[6][0] = "happy";
+precure[6][1] = "sunny";
+precure[6][2] = "peace";
+precure[6][3] = "march";
+precure[6][4] = "beauty";
+precure[7][0] = "heart";
+precure[7][1] = "diamond";
+precure[7][2] = "rosetta";
+precure[7][3] = "sword";
+precure[7][4] = "ace";
+precure[8][0] = "lovely";
+precure[8][1] = "princess";
+precure[8][2] = "honey";
+precure[8][3] = "fortune";
+precure[9][0] = "flora";
+precure[9][1] = "mermaid";
+precure[9][2] = "twinkle";
+precure[9][3] = "scarlet";
+precure[10][0] = "miracle";
+precure[10][1] = "magical";
+precure[10][2] = "felice";
+precure[10][3] = "mofurun";
+precure[11][0] = "whip";
+precure[11][1] = "custard";
+precure[11][2] = "gelatto";
+precure[11][3] = "macaron";
+precure[11][4] = "chocolat";
+precure[11][5] = "parfait";
+
+
+// get 2's complement and back
+String h = "FF0F";
+int n = Short.valueOf(h.substring(2,4),16).byteValue(); // get a negative int from a 2's complement negative string
+System.out.println(n);
+n = -n;
+if (n<0) n += 65536; //conversion to get the neg number in 2's complement
+String hex = String.format("%2S",Integer.toString(n, 16)).replace(' ','0');
+hex = hex.substring(hex.length()-2); // adjust to 1B
+System.out.println(hex);
+
+
+//increase string's size to specified length
+String toPad = "Apple";
+String padded = String.format("%8s", toPad).replace(' ', '0');
+System.out.println(padded);
+System.out.println(toPad);
+
+
+//get char hex ascii code
+String mirror = "Alice";
+char primo = mirror.charAt(0);
+int ascii = (int) primo;
+String Hascii = Integer.toString((int) primo, 16);
+System.out.println(ascii);
+System.out.println(Hascii);
+
+String fisico = "0";
+//fisico = Integer.toHexString(Integer.parseInt(fisico, 16)+1);
+for (int i = 0; i < 255; i++) {
+	fisico = String.format("%3S",Integer.toString(Integer.parseInt(fisico, 16)+1, 16)).replace(' ','0');
+	System.out.println(fisico);	
+}
+
+
+String b = "abc";
+if (b == "abc") {
+	System.out.println(99);
+}

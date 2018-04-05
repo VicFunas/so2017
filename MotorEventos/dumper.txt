@@ -1,0 +1,59 @@
+E00			#INICIO
+E00	D100	#descobre primeiro byte do endereço inicial
+E02 E300	#Coloca em arquivo
+E04	4E18	#consegue primeiro endereco pro loop
+E06	9E18	#coloca o primeiro endereco pro loop
+E08	D110	#descobre segundo byte do endereço inicial
+E0A E301	#Coloca em arquivo
+E0C	9E19	#coloca o primeiro endereco pro loop
+E0E	D120	#descobre tamanho do programa
+E10	9E42	#pega tamanho total do programa
+E12	9E49	#inicializa restante para envio
+E14 0E4C	#subrotina para verificar tamanho 
+E16	E301	#Coloca em arquivo
+E18	8000	#Pega o conteudo da memoria (LOOP)
+E1A	E301	#Coloca em arquivo
+E1C	4E46	#novo valor do checksum
+E1E	9E46	#atualiza checksum
+E20	8E49	#carrega restante
+E22	5E43	#novo valor do resto
+E24 9E49	#atualiza restante
+E26 1E3A	#if == 0 goTo ENDE
+E28	8E44	#Carrega a contagem de bytes lidos
+E2A	4E43	#Incrementa a contagem de bytes lidos
+E2C 9E44	#Atualiza a contagem de bytes lidos
+E2E	5E45	#verifica se chegou no limite do bloco (count-= MAX)
+E30	1E5C	#if == 0 goTo NewLine
+E32	8E19	#Carrega o endereco de memoria
+E34	4E43	#Incrementa o endereco
+E36	9E19	#Atualiza o endereco
+E38	0E18	#manda novo dado
+E3A	8E46	#carrega checksum (ENDE)
+E3C E301	#manda checksum pro arquivo
+E3E E303	#manda '000000'
+E40 CE40	#FINALE
+E42	2C01	#tamanho e UM
+E44	0016	#contagem e MAX
+E46	0080	#checksum e hakuoken
+E48	0000	#ZERO e resto
+E4C	5E45	#ve se tamanho < max (vetam)
+E4E	1E56	#uma unica linha
+E50	8E45	#carrega o max
+E52	E301	#manda pro arquivo
+E54	0E18	#comeca envio de dados
+E56	8E49	#carrega o RESTO (uni)
+E58	E301	#envia o tamanho pro arquivo
+E5A	0E18	#comeca envio de dados
+E5C	8E46	#carrega checksum (nl)
+E5E	E301	#manda checksum pro arquivo
+E60	E302	#prepara para nova linha ('111111' + CR + LF)
+E62	8E18	#carrega primeiro endereco linha
+E64	5E47	#obtem o primeiro byte do endereço
+E66	E301	#manda pro arquivo
+E68	8E19	#carrega segundo byte do endereço
+E6A E301	#manda pro arquivo
+E6C	8E48	#carrega zero
+E6E	9E44	#reseta contagem
+E70	9E46	#reseta checksum
+E72 8E49	#carrega RESTO
+E74 0E4C	#vai pra verificar tamanho e comecar envio 

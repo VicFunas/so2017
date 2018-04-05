@@ -1,0 +1,89 @@
+C00			#INICIO
+C00	D300	#Lê um byte do txt (D3skip)
+C02	9C3B	#Armazena no TEMP
+C04 8C3A	#Carrega o contador no acumulador
+C06 5C3C	#COUNT -= 3
+C08 2C42	#JSR (caso esteja no "cabeçalho") 
+C0A 8C3A	#Carrega o contador no acumulador
+C0C	5C38	#if contagem == tamanho
+C0E	1C84	#vai avaliar checksum
+C10 8C3A	#Carrega o contador no acumulador
+C12	5C3E	#if contagem == max
+C14	1C36	#finaliza (chegou no tamanho limite)
+C16 8C3B	#Carrega o valor lido (INICIO das INSTRUCOES)
+C18	4C40	#incrementa o checksum
+C1A	9C40	#Atualiza checksum
+C1C 8C3B	#Carrega o valor lido
+C1E	9000	#Armazena na memoria (POS1 e POS2)
+C20	8C1F	#Carrega a posição de carga
+C22	4C39	#Soma 1 à posição de carga 
+C24	9C1F	#Atualiza posição de carga 
+C26 8C01	#Carrega o "skip"
+C28 4C39	#Soma 1 ao skip (n° de bytes lidos)
+C2A 9C01	#Atualiza skip
+C2C 8C3A	#Carrega o contador no acumulador
+C2E	4C39	#Soma 1 ao acumulador
+C30 9C3A	#Atualiza o contador
+C32 0C00	#goTo INICIO 
+C34 0000	#RUN (0FIEND + SEND)
+C36	CC36	#Ende (deu ruim)
+C38 2C01	#tamanho e UM
+C3A 0000	#COUNT e TEMP
+C3C 0300	#TRES e ZERO
+C3E 7F90	#MAX e 90
+C40	0002	#check e DOIS
+C42	4C39	#COUNT += 1 (SR)
+C44 1C6E	#if COUNT == 2 goTo DD
+C46	4C39	#COUNT += 1
+C48	1C5C	#if COUNT == 1 goTo PINK
+C4A	8C01	#carrega o offset (ZERO DAWN)
+C4C	1C56	#if offset == 0 (primeira linha)
+C4E 8C3B	#Carrega o valor lido 
+C50 4C1E	#Lido += 9x (P1)
+C52 9C1E	#Pega byte mais significativo do endereço inicial de carga
+C54 0C76	#goTo FINALE p terminar a sub-rotina
+C56 8C3B	#Carrega o valor lido  (primo)
+C58 9C34 	#Armazena no primeiro fim
+C5A	0C50	#continua Zero Dawn
+C5C	8C01	#carrega o offset (PINK)
+C5E	5C39 	#verifica se offset == 1
+C60	1C68	#if offset == 1 (primeira linha)
+C62 8C3B	#Carrega o valor lido 
+C64	9C1F	#Pega byte menos significativo do endereço inicial de carga (P2)
+C66 0C76	#goTo FINALE p terminar a sub-rotina
+C68 8C3B	#Carrega o valor lido (secondo)
+C6A 9C35 	#Armazena no segundo fim 
+C6C	0C64	#continua PINK
+C6E 8C3B	#Carrega o valor lido (DD)
+C70	4C3C	#tam +=2 (offset de tres para o contador) 
+C72 9C38	#Pega tamanho do programa
+C74 0C76	#goTo FINALE p terminar a sub-rotina
+C76 8C3A	#Carrega o contador (FINALE)
+C78 4C39 	#COUNT += 1
+C7A 9C3A	#Atualiza COUNT
+C7C 8C01	#Carrega o "skip"
+C7E 4C39	#Soma 1 ao skip (n° de bytes lidos)
+C80 9C01	#Atualiza skip
+C82 0C00	#RTS
+C84	8C01	#carrega o skip (AVAL)
+C86	9C89	#mexe para leitura
+C88	D300	#Le o checksum
+C8A	5C40	#verifica o checksum
+C8C	1C90 	#prepara para leitura de possivel proxima linha (caso certo)
+C8E	0C36	#encerra tudo
+C90 8C01	#Carrega o "skip" (nl)
+C92 4C39	#Soma 1 ao skip (n° de bytes lidos)
+C94 9C01	#Atualiza skip
+C96	9C99	#Pega skip de verificar linha
+C98	DF00	#Le e verifica se ultima linha
+C9A 1C34	#if (ultima_linha) goTo RUN
+C9C 8C01	#Carrega o "skip" (nl)
+C9E 4C39	#Soma 1 ao skip (n° de bytes lidos)
+CA0	9C01	#Atualiza skip
+CA2	8C3D	#Carrega o zero para reset
+CA4	9C3A	#zera o contador
+CA6	9C40	#zera checksum
+CA8	9C1F	#zera POS2
+CAA	8C3F	#carrega 90 para zerar POS1
+CAC	9C1E	#zera POS1
+CAE 0C00	#pega prox linha
